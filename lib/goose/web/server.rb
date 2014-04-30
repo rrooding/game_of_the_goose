@@ -1,5 +1,11 @@
-require 'sinatra'
+require 'sinatra/base'
 
-get '/' do
-  "Hello World"
+module Goose
+  module Web
+    class Server < Sinatra::Base
+      get '/' do
+        "Hello World"
+      end
+    end
+  end
 end
