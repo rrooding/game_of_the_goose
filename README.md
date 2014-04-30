@@ -16,7 +16,8 @@ The cukes are therefor in Dutch.
 ###Generic
 
 * Clone this repository
-* Copy `env.example` to `.env`.
+* Copy `env.example` to `.env`
+* Run `bundle install`
 
 
 ###Web
