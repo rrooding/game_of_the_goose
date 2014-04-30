@@ -19,4 +19,10 @@ steps_for :core do
 
     expect(@game.players_order).to match_array(player_names_with_the_clock)
   end
+
+  step 'alle pionnen staan op het startvakje' do
+    player_names_with_the_clock.each do |name|
+      expect(@game.player_position(name)).to  eql(0)
+    end
+  end
 end

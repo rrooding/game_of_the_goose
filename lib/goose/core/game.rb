@@ -16,6 +16,10 @@ module Goose
         @players.map(&:name)
       end
 
+      def player_position(name)
+        0
+      end
+
       private
 
       def player(name, age)
