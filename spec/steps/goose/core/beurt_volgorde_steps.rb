@@ -26,7 +26,15 @@ steps_for :core do
     end
   end
 
-  step 'is :player_name aan de beurt om te dobbelen omdat hij de jongste speler is' do |player_name|
+  def assert_current_player(player_name)
     expect(@game.current_player.name).to eql(player_name)
+  end
+
+  step :assert_current_player, 'is :player_name aan de beurt om te dobbelen omdat hij de jongste speler is'
+  step :assert_current_player, 'is :player_name aan de beurt om te dobbelen'
+
+  step 'de beurt van :player_name is geweest' do |player_name|
+    assert_current_player(player_name)
+    @game.end_turn
   end
 end

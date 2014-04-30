@@ -24,6 +24,10 @@ module Goose
         @current_player || youngest_player
       end
 
+      def end_turn
+        @current_player = next_player
+      end
+
       private
 
       def player(name, age)
@@ -32,6 +36,12 @@ module Goose
 
       def youngest_player
         @players.sort_by(&:age).first
+      end
+
+      def next_player
+        i = @players.index(current_player)
+        i = (i + 1) % (@players.length)
+        @players[i]
       end
     end
   end
