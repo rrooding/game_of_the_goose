@@ -1,4 +1,5 @@
 # language: nl
+@core
 Functionaliteit: Beurt volgorde
 
   Achtergrond:

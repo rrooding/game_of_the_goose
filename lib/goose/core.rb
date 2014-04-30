@@ -1,0 +1,1 @@
+require 'goose/core/game'
