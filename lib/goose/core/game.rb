@@ -20,10 +20,18 @@ module Goose
         0
       end
 
+      def current_player
+        @current_player || youngest_player
+      end
+
       private
 
       def player(name, age)
         Goose::Core::Player.new(name, age.to_i)
+      end
+
+      def youngest_player
+        @players.sort_by(&:age).first
       end
     end
   end
