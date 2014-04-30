@@ -16,7 +16,7 @@ The cukes are therefor in Dutch.
 Run the features:
 
 ```
-$ bundle exec cucumber
+$ bundle exec rspec
 ```
 
 Or use Guard during development:
