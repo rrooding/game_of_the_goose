@@ -5,4 +5,18 @@ steps_for :core do
     @game = Goose::Core::Game.new
     expect(@game.positions.length).to be(63)
   end
+
+  def player_names_with_the_clock
+    @players.map{|h| h['naam']}
+  end
+
+  step 'ik heb de volgende spelers met de klok mee:' do |table|
+    @players = table.hashes
+
+    table.hashes.each do |hash|
+      @game.add_player(hash['naam'], hash['leeftijd'], hash['kleur pion'])
+    end
+
+    expect(@game.players_order).to match_array(player_names_with_the_clock)
+  end
 end
