@@ -1,5 +1,4 @@
-require 'sinatra/base'
-require 'haml'
+Bundler.require(:web)
 
 module Goose
   module Web
