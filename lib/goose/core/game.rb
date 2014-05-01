@@ -16,7 +16,7 @@ module Goose
         @players.map(&:name)
       end
 
-      def player_position(name)
+      def player_position(*)
         0
       end
 
