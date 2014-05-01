@@ -1,9 +1,12 @@
 source 'https://rubygems.org'
 
-gem 'sinatra'
-gem 'puma'
-gem 'foreman'
-gem 'haml'
+gem 'foreman', require: false
+
+group :web do
+  gem 'sinatra'
+  gem 'haml'
+  gem 'puma', require: false
+end
 
 group :test do
   gem 'turnip', require: false
