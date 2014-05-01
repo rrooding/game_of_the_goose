@@ -25,7 +25,7 @@ GEM
     guard-rspec (4.2.8)
       guard (~> 2.1)
       rspec (>= 2.14, < 4.0)
-    haml (4.0.4)
+    haml (4.0.5)
       tilt
     listen (2.7.3)
       celluloid (>= 0.15.2)
