@@ -9,4 +9,5 @@ group :test do
   gem 'turnip'
   gem 'guard-rspec'
   gem 'rack-test'
+  gem 'rubocop', require: false
 end
