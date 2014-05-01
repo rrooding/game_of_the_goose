@@ -44,3 +44,9 @@ Or use Guard during development:
 ```
 $ bundle exec guard
 ```
+
+Check compliance to the Ruby style guidelines:
+
+```
+$ bundle exec rubocop
+```
