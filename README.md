@@ -1,4 +1,4 @@
-Game of Geese
+Game of the Goose
 =============
 
 This is the main repo for distributing the cucumber features for
@@ -11,8 +11,28 @@ This time it is a Dutch themed challenge.
 
 The cukes are therefor in Dutch.
 
+##Setup
 
-##Testing
+###Generic
+
+* Clone this repository
+* Copy `env.example` to `.env`
+* Run `bundle install`
+
+
+###Web
+
+Start the webserver
+
+```
+$ bundle exec foreman run web
+```
+
+Now go to [http://localhost:8000](http://localhost:8000)
+
+
+### Testing
+
 Run the features:
 
 ```
