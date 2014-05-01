@@ -1,5 +1,9 @@
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start do
+  add_filter '/spec/'
+  add_group 'Core', 'lib/goose/core'
+  add_group 'Web', 'lib/goose/web'
+end
 
 Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |f| require f }
 Dir[File.dirname(__FILE__) + '/steps/**/*_steps.rb'].each { |f| require f }
