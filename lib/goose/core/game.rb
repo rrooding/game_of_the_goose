@@ -8,7 +8,7 @@ module Goose
         @players = []
       end
 
-      def add_player(name, age, color_pion)
+      def add_player(name, age)
         @players.push player(name, age)
       end
 

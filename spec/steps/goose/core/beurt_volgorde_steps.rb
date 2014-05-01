@@ -14,7 +14,7 @@ steps_for :core do
     @players = table.hashes
 
     table.hashes.each do |hash|
-      @game.add_player(hash['naam'], hash['leeftijd'], hash['kleur pion'])
+      @game.add_player(hash['naam'], hash['leeftijd'])
     end
 
     expect(@game.players_order).to match_array(player_names_with_the_clock)
