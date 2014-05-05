@@ -1,4 +1,5 @@
 # language: nl
+@core
 Functionaliteit: Pion verzetten
 
   Achtergrond:
