@@ -15,8 +15,8 @@ describe Goose::Core::Game do
       it 'moves the specified amount of steps' do
         dice = double(roll: 4)
 
-        expect { subject.turn dice }.to
-        change { current_player.position }.by(4)
+        expect { subject.turn dice }.to \
+          change { current_player.position }.by(4)
       end
 
       it 'ends the turn of the current player' do
