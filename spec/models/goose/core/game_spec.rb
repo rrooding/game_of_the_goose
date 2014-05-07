@@ -12,12 +12,11 @@ describe Goose::Core::Game do
     let!(:current_player) { subject.current_player }
 
     context 'landing on regular position' do
-      it 'increases the position of the current player with the amount returned by the dice' do
-        dice = double( roll: 4 )
+      it 'moves the specified amount of steps' do
+        dice = double(roll: 4)
 
-        expect {
-          subject.turn dice
-        }.to change { current_player.position }.by(4)
+        expect { subject.turn dice }.to
+        change { current_player.position }.by(4)
       end
 
       it 'ends the turn of the current player' do

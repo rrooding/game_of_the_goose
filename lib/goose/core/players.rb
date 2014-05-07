@@ -2,13 +2,13 @@ module Goose
   module Core
     class Players < Array
       def for_color(color)
-        self.select { |p| p.color == color }.first
+        select { |p| p.color == color }.first
       end
 
       def add_player(name, age, color)
-        p = player(name, age, color)
-        self.push p
-        p
+        new_player = player(name, age, color)
+        push new_player
+        new_player
       end
 
       private
