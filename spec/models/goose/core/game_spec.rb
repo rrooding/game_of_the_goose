@@ -13,10 +13,10 @@ describe Goose::Core::Game do
 
     context 'landing on regular position' do
       it 'increases the position of the current player with the amount returned by the dice' do
-        Goose::Core::Dice.stub(:roll).and_return 4
+        dice = double( roll: 4 )
 
         expect {
-          subject.turn
+          subject.turn dice
         }.to change { current_player.position }.by(4)
       end
 

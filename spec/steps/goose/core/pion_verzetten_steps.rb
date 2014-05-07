@@ -1,12 +1,12 @@
 steps_for :core do
   step ':player_name :number dobbelt' do |player_name, number|
     while @game.current_player.name != player_name
-      Goose::Core::Dice.stub(:roll).and_return 0
-      @game.turn
+      dice = double( roll: 0 )
+      @game.turn dice
     end
 
-    Goose::Core::Dice.stub(:roll).and_return number.to_i
-    @game.turn
+    dice = double( roll: number.to_i )
+    @game.turn dice
   end
 
   step ':player_name gooit altijd :number met de dobbelsteen' do |player_name, number|

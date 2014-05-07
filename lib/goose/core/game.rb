@@ -28,8 +28,8 @@ module Goose
         @players.add_player(name, age, color)
       end
 
-      def turn
-        moves = Dice.roll
+      def turn(dice = Dice)
+        moves = dice.roll
         current_player.position += moves
         end_turn
       end
