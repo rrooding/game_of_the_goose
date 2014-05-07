@@ -27,4 +27,13 @@ steps_for :core do
 
     expect(player.position).to eq position
   end
+
+  step 'is de bord opstelling als volgt:' do |table|
+    players = @game.players
+
+    table.hashes.each do |hash|
+      player = players.for_color(hash['pion'])
+      expect(player.position).to eq hash['vakje'].to_i
+    end
+  end
 end
