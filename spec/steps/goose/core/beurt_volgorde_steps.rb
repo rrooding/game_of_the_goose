@@ -12,15 +12,15 @@ steps_for :core do
     @players = table.hashes
 
     table.hashes.each do |hash|
-      @game.add_player(hash['naam'], hash['leeftijd'])
+      @game.add_player(hash['naam'], hash['leeftijd'], hash['kleur pion'])
     end
 
     expect(@game.players_order).to match_array(player_names_with_the_clock)
   end
 
   step 'alle pionnen staan op het startvakje' do
-    player_names_with_the_clock.each do |name|
-      expect(@game.player_position(name)).to eql(0)
+    @game.players.each do |player|
+      expect(player.position).to eql(0)
     end
   end
 

@@ -4,24 +4,34 @@ module Goose
       attr_reader :positions
 
       def initialize
-        @positions = Array.new(63, {})
-        @players = []
+        @positions = Array.new(63)
+        @players = Players.new
       end
 
-      def add_player(name, age)
-        @players.push player(name, age)
+      def players
+        @players.clone.freeze
       end
 
       def players_order
         @players.map(&:name)
       end
 
-      def player_position(*)
-        0
+      def player_position(player)
+        player.position
       end
 
       def current_player
         @current_player || youngest_player
+      end
+
+      def add_player(name, age, color)
+        @players.add_player(name, age, color)
+      end
+
+      def turn
+        moves = Dice.roll
+        current_player.position += moves
+        end_turn
       end
 
       def end_turn
@@ -29,10 +39,6 @@ module Goose
       end
 
       private
-
-      def player(name, age)
-        Goose::Core::Player.new(name, age.to_i)
-      end
 
       def youngest_player
         @players.sort_by(&:age).first
