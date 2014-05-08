@@ -1,27 +1,34 @@
 module Goose
   module Core
+    # responsible for the turns
     class Game
-      attr_reader :positions
+      attr_reader :board
 
-      def initialize
-        @positions = Array.new(63, {})
-        @players = []
+      def initialize(board = Board.new)
+        @board = board
+        @players = Players.new
       end
 
-      def add_player(name, age)
-        @players.push player(name, age)
-      end
-
-      def players_order
-        @players.map(&:name)
-      end
-
-      def player_position(*)
-        0
+      def players
+        @players.clone.freeze
       end
 
       def current_player
-        @current_player || youngest_player
+        @current_player || @players.youngest_player
+      end
+
+      def add_player(name, age, color)
+        @players.add_player(name, age, color)
+      end
+
+      def turn(dice = Dice.new)
+        moves = dice.roll
+        current_player.position = @board.next_position(current_player.position, moves)
+        end_turn
+      end
+
+      def winner
+        @players.select { |p| p.position >= @board.size }.first
       end
 
       def end_turn
@@ -29,14 +36,6 @@ module Goose
       end
 
       private
-
-      def player(name, age)
-        Goose::Core::Player.new(name, age.to_i)
-      end
-
-      def youngest_player
-        @players.sort_by(&:age).first
-      end
 
       def next_player
         i = @players.index(current_player)
