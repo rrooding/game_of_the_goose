@@ -14,9 +14,7 @@ steps_for :core do
   end
 
   step 'het :position vakje is een ganzenvakje' do |position|
-    position = position.to_i
-
-    fail
+    @game.board.goose_at position.to_i
   end
 
   step 'staat de paarse pion op het :position vakje' do |position|

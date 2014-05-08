@@ -1,19 +1,15 @@
 module Goose
   module Core
     class Game
-      attr_reader :positions
+      attr_reader :board
 
-      def initialize
-        @positions = Array.new(63)
+      def initialize(board = Board.new)
+        @board = board
         @players = Players.new
       end
 
       def players
         @players.clone.freeze
-      end
-
-      def players_order
-        @players.map(&:name)
       end
 
       def current_player
@@ -26,16 +22,21 @@ module Goose
 
       def turn(dice = Dice.new)
         moves = dice.roll
+
+        new_player_position = current_player.position + moves
+        moves *= @board.multiplier_for(new_player_position)
+
         current_player.position += moves
+
         end_turn
+      end
+
+      def winner
+        @players.by_age_asc.select { |p| p.position >= @board.size }.first
       end
 
       def end_turn
         @current_player = next_player
-      end
-
-      def winner
-        @players.by_age_asc.select { |p| p.position >= @positions.size }.first
       end
 
       private

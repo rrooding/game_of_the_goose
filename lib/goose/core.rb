@@ -1,4 +1,5 @@
 require 'goose/core/game'
+require 'goose/core/board'
 require 'goose/core/player'
 require 'goose/core/players'
 require 'goose/core/dice'
