@@ -9,8 +9,9 @@ steps_for :core do
     @game.turn dice
   end
 
-  step ':player_name gooit altijd :number met de dobbelsteen' do |_, number|
-    Goose::Core::Dice.any_instance.stub(:roll).and_return number.to_i
+  step ':player_name gooit altijd :number met de dobbelsteen' do |player , number|
+    @dices = {}
+    @dices[player] = double(roll: number.to_i)
   end
 
   step 'het :position vakje is een ganzenvakje' do |position|
@@ -36,11 +37,15 @@ steps_for :core do
   end
 
   step 'er 11 speelrondes zijn gespeeld' do
-    amount = @game.players.count * 11
-    amount.times do
-      @game.turn
+    round = 0
+    start_player = @game.current_player
+
+    while round < 11 do
+      @game.turn(@dices[@game.current_player.name] ||  double(roll: 0))
+
+      round+= 1 if start_player == @game.current_player
     end
-  end
+ end
 
   step 'heeft :player_name het spel gewonnen' do |player_name|
     players = @game.players

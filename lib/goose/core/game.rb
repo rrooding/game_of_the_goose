@@ -28,7 +28,7 @@ module Goose
       end
 
       def winner
-        @players.by_age_asc.select { |p| p.position >= @board.size }.first
+        @players.select { |p| p.position >= @board.size }.first
       end
 
       def end_turn
