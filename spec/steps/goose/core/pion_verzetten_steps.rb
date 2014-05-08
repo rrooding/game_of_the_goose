@@ -10,7 +10,7 @@ steps_for :core do
   end
 
   step ':player_name gooit altijd :number met de dobbelsteen' do |player_name, number|
-    fail
+    Goose::Core::Dice.stub(:roll).and_return number.to_i
   end
 
   step 'het :position vakje is een ganzenvakje' do |position|
@@ -35,5 +35,19 @@ steps_for :core do
       player = players.for_color(hash['pion'])
       expect(player.position).to eq hash['vakje'].to_i
     end
+  end
+
+  step 'er 11 speelrondes zijn gespeeld' do
+    amount = @game.players.count * 11
+    amount.times do
+      @game.turn
+    end
+  end
+
+  step 'heeft :player_name het spel gewonnen' do |player_name|
+    players = @game.players
+    player = players.with_name(player_name)
+
+    expect(@game.winner).to eq player
   end
 end

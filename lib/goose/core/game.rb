@@ -21,7 +21,7 @@ module Goose
       end
 
       def current_player
-        @current_player || youngest_player
+        @current_player || @players.youngest_player
       end
 
       def add_player(name, age, color)
@@ -38,11 +38,11 @@ module Goose
         @current_player = next_player
       end
 
-      private
-
-      def youngest_player
-        @players.sort_by(&:age).first
+      def winner
+        @players.by_age_asc.select { |p| p.position >= @positions.size }.first
       end
+
+      private
 
       def next_player
         i = @players.index(current_player)

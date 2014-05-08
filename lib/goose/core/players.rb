@@ -5,10 +5,22 @@ module Goose
         select { |p| p.color == color }.first
       end
 
+      def with_name(name)
+        select { |p| p.name == name }.first
+      end
+
       def add_player(name, age, color)
         new_player = player(name, age, color)
         push new_player
         new_player
+      end
+
+      def by_age_asc
+        sort_by(&:age)
+      end
+
+      def youngest_player
+        by_age_asc.first
       end
 
       private

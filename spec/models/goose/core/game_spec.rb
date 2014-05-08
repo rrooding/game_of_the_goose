@@ -27,4 +27,24 @@ describe Goose::Core::Game do
 
     context 'landing on goose position'
   end
+
+  describe '#winner' do
+    context 'no players >= position 63' do
+      it 'returns nil' do
+        expect(subject.winner).to be_nil
+      end
+    end
+
+    context 'a player with position 63' do
+      let!(:winning_player) { subject.add_player('player3', 0, 'rood') }
+
+      before do
+        winning_player.position = 63
+      end
+
+      it 'returns the winning player' do
+        expect(subject.winner).to eq winning_player
+      end
+    end
+  end
 end
