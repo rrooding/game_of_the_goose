@@ -9,8 +9,8 @@ steps_for :core do
     @game.turn dice
   end
 
-  step ':player_name gooit altijd :number met de dobbelsteen' do |player_name, number|
-    Goose::Core::Dice.stub(:roll).and_return number.to_i
+  step ':player_name gooit altijd :number met de dobbelsteen' do |_, number|
+    Goose::Core::Dice.any_instance.stub(:roll).and_return number.to_i
   end
 
   step 'het :position vakje is een ganzenvakje' do |position|
