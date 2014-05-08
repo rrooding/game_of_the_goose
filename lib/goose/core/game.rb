@@ -16,10 +16,6 @@ module Goose
         @players.map(&:name)
       end
 
-      def player_position(player)
-        player.position
-      end
-
       def current_player
         @current_player || @players.youngest_player
       end
