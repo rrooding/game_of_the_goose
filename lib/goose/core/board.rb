@@ -1,5 +1,6 @@
 module Goose
   module Core
+    # responsible for the moves
     class Board
       FIELD_TYPES = [:goose].freeze
 
@@ -15,12 +16,19 @@ module Goose
         @fields[position] = :goose
       end
 
-      def multiplier_for(position)
+      def next_position(start, move)
+        new_position = start + move
+        apply_field_rule(new_position, move)
+      end
+
+      private
+      # where do object go and hide? in big or private functions
+      def apply_field_rule(position, move)
         case @fields[position]
-        when :goose
-          2
-        else
-          1
+          when :goose
+            position + move
+          else
+            position
         end
       end
     end

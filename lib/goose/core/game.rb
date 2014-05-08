@@ -1,5 +1,6 @@
 module Goose
   module Core
+    # responsible for the turns
     class Game
       attr_reader :board
 
@@ -22,12 +23,7 @@ module Goose
 
       def turn(dice = Dice.new)
         moves = dice.roll
-
-        new_player_position = current_player.position + moves
-        moves *= @board.multiplier_for(new_player_position)
-
-        current_player.position += moves
-
+        current_player.position = @board.next_position(current_player.position, moves)
         end_turn
       end
 
