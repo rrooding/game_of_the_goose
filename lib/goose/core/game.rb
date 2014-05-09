@@ -50,8 +50,11 @@ module Goose
 
       def next_player
         i = @players.index(current_player)
-        i = (i + 1) % (@players.length)
-        @players[i]
+        @players[next_index(i)]
+      end
+
+      def next_index(i)
+        (i + 1) % @players.length
       end
     end
   end
