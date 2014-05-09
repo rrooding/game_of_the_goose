@@ -15,7 +15,7 @@ module Goose
       end
 
       def current_player
-        @current_player || @players.youngest_player
+        @current_player || starting_player
       end
 
       def add_player(name, age, color)
@@ -29,19 +29,23 @@ module Goose
         end_turn
       end
 
-      def winner
-        @players.select { |p| p.position >= @board.size }.first
-      end
-
       def end_turn
         @current_player = next_player
         update_round
       end
 
+      def starting_player
+        @players.youngest_player
+      end
+
+      def winner
+        @players.select { |p| p.position >= @board.size }.first
+      end
+
       private
 
       def update_round
-        @round += 1 if @players.youngest_player == current_player
+        @round += 1 if starting_player == current_player
       end
 
       def next_player
