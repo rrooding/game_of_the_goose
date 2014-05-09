@@ -43,9 +43,6 @@ steps_for :core do
   end
 
   step 'heeft :player_name het spel gewonnen' do |player_name|
-    players = @game.players
-    player = players.with_name(player_name)
-
-    expect(@game.winner).to eq player
+    expect(@game.winner.name).to eq player_name
   end
 end
