@@ -28,6 +28,14 @@ describe Goose::Core::Board do
       end
     end
 
+    context 'landing on field field beyond board length' do
+      let(:move) { subject.size }
+      it 'the new position is to max board length' do
+        expect(new_position).to eq subject.size
+      end
+    end
+
+
     context 'landing on goose field' do
       before do
         subject.goose_at(position + move)
