@@ -30,32 +30,4 @@ describe Goose::Core::Players do
       end
     end
   end
-
-  describe '#with_name' do
-    let(:returned_player) { subject.with_name('ralph') }
-
-    context 'no players' do
-      it 'returns nil' do
-        expect(returned_player).to be_nil
-      end
-    end
-
-    context 'no player with given name' do
-      before do
-        subject.add_player('stefan', 0, 'groen')
-      end
-
-      it 'returns nil' do
-        expect(returned_player).to be_nil
-      end
-    end
-
-    context 'player with given name' do
-      let!(:player) { subject.add_player('ralph', 0, 'paars') }
-
-      it 'returns the player' do
-        expect(returned_player).to eq player
-      end
-    end
-  end
 end
