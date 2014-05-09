@@ -5,32 +5,21 @@ module Goose
       FIELD_TYPES = [:goose].freeze
 
       def initialize(size = 63)
-        @fields = Array.new(size)
+        @fields = Array.new(size, RegularField.new)
       end
 
       def size
         @fields.size
       end
 
-      def goose_at(position)
-        @fields[position] = :goose
+      def goose_at(position, field = GooseField.new )
+        @fields[position] = field
       end
 
       def next_position(start, move)
         new_position = start + move
-        apply_field_rule(new_position, move)
-      end
-
-      private
-
-      # where do object go and hide? in big or private functions
-      def apply_field_rule(position, move)
-        case @fields[position]
-        when :goose
-          position + move
-        else
-          position
-        end
+        return size if new_position>size
+        @fields[new_position].apply_field_rule(new_position, move)
       end
     end
   end
