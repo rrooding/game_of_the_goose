@@ -10,16 +10,16 @@ module Goose
         @round = 0
       end
 
+      def add_player(name, age, color)
+        @players.add_player(name, age, color)
+      end
+
       def players
         @players.clone.freeze
       end
 
       def current_player
         @current_player || starting_player
-      end
-
-      def add_player(name, age, color)
-        @players.add_player(name, age, color)
       end
 
       def turn(dice = Dice.new)
