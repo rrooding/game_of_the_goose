@@ -15,15 +15,15 @@ module Goose
         new_player
       end
 
-      def by_age_asc
-        sort_by(&:age)
-      end
-
       def youngest_player
         by_age_asc.first
       end
 
       private
+
+      def by_age_asc
+        sort_by(&:age)
+      end
 
       def player(name, age, color)
         Goose::Core::Player.new(name, age.to_i, color)

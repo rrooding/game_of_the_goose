@@ -22,13 +22,14 @@ module Goose
       end
 
       private
+
       # where do object go and hide? in big or private functions
       def apply_field_rule(position, move)
         case @fields[position]
-          when :goose
-            position + move
-          else
-            position
+        when :goose
+          position + move
+        else
+          position
         end
       end
     end

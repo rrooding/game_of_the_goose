@@ -1,6 +1,6 @@
 steps_for :core do
-  step ':player_name :number dobbelt' do |player_name, number|
-    while @game.current_player.name != player_name
+  step ':player :number dobbelt' do |player, number|
+    while @game.current_player.name != player
       dice = double(roll: 0)
       @game.turn dice
     end
@@ -9,7 +9,7 @@ steps_for :core do
     @game.turn dice
   end
 
-  step ':player_name gooit altijd :number met de dobbelsteen' do |player , number|
+  step ':player gooit altijd :number met de dobbelsteen' do |player , number|
     @dices = {}
     @dices[player] = double(roll: number.to_i)
   end
@@ -37,15 +37,10 @@ steps_for :core do
   end
 
   step 'er 11 speelrondes zijn gespeeld' do
-    round = 0
-    start_player = @game.current_player
-
-    while round < 11 do
+    while @game.round < 11
       @game.turn(@dices[@game.current_player.name] ||  double(roll: 0))
-
-      round+= 1 if start_player == @game.current_player
     end
- end
+  end
 
   step 'heeft :player_name het spel gewonnen' do |player_name|
     players = @game.players
