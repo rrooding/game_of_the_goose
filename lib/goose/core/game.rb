@@ -39,7 +39,7 @@ module Goose
       end
 
       def winner
-        @players.select { |p| p.position >= @board.size }.first
+        @players.max_by(&:position)
       end
 
       private
