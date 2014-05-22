@@ -22,7 +22,6 @@ describe Goose::Core::Board do
     let(:new_position) { subject.next_position(position, move) }
 
     context 'landing on regular field' do
-
       it 'the new position is equal to move' do
         expect(new_position).to eq position + move
       end
@@ -35,7 +34,6 @@ describe Goose::Core::Board do
       end
     end
 
-
     context 'landing on goose field' do
       before do
         subject.goose_at(position + move)
@@ -43,6 +41,37 @@ describe Goose::Core::Board do
 
       it 'the new position is equal to twice the move' do
         expect(new_position).to eq position + (move * 2)
+      end
+    end
+
+    context 'landing on "roll dice again field"' do
+      before do
+        subject.goose_at(position + move, Goose::Core::RollDiceAgainField.new)
+      end
+
+      it 'the new position is equal to twice the move' do
+        expect(new_position).to eq position + move
+      end
+    end
+
+    describe 'roll again' do
+      let(:position) { 3 }
+      let(:roll_again) { subject.roll_again? position }
+
+      context 'when landing on regular field' do
+        it 'not rolling again' do
+          expect(roll_again).to be_false
+        end
+      end
+
+      context 'when landing on other field' do
+        before do
+          subject.goose_at(position, Goose::Core::RollDiceAgainField.new)
+        end
+
+        it 'not rolling again' do
+          expect(roll_again).to be_true
+        end
       end
     end
   end
