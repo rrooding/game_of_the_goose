@@ -2,8 +2,6 @@ module Goose
   module Core
     # responsible for the moves
     class Board
-      FIELD_TYPES = [:goose].freeze
-
       def initialize(size = 63)
         @fields = Array.new(size, RegularField.new)
       end
@@ -12,7 +10,7 @@ module Goose
         @fields.size
       end
 
-      def goose_at(position, field = GooseField.new)
+      def field_type_at(position, field = GooseField.new)
         @fields[position] = field
       end
 

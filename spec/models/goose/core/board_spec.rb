@@ -36,7 +36,7 @@ describe Goose::Core::Board do
 
     context 'landing on goose field' do
       before do
-        subject.goose_at(position + move)
+        subject.field_type_at(position + move)
       end
 
       it 'the new position is equal to twice the move' do
@@ -46,7 +46,7 @@ describe Goose::Core::Board do
 
     context 'landing on "roll dice again field"' do
       before do
-        subject.goose_at(position + move, Goose::Core::RollDiceAgainField.new)
+        subject.field_type_at(position + move, Goose::Core::RollDiceAgainField.new)
       end
 
       it 'the new position is equal to twice the move' do
@@ -66,7 +66,7 @@ describe Goose::Core::Board do
 
       context 'when landing on other field' do
         before do
-          subject.goose_at(position, Goose::Core::RollDiceAgainField.new)
+          subject.field_type_at(position, Goose::Core::RollDiceAgainField.new)
         end
 
         it 'not rolling again' do
