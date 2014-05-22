@@ -10,4 +10,10 @@ steps_for :core do
   step 'alleen als je minder dan :dice_value had gegooid' do |dice_value|
     @roll_again_field.dice_upper_limit dice_value.to_i
   end
+
+  step 'de blauwe pion staat op het :position vakje' do |position|
+    position = position.to_i
+    @game.turn( double('Dice', roll: position))
+    @game.end_turn
+  end
 end
