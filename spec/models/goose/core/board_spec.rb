@@ -56,7 +56,7 @@ describe Goose::Core::Board do
 
     describe 'roll again' do
       let(:position) { 3 }
-      let(:roll_again) { subject.roll_again? position }
+      let(:roll_again) { subject.roll_again? position, 1 }
 
       context 'when landing on regular field' do
         it 'not rolling again' do

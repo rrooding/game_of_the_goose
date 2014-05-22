@@ -5,7 +5,7 @@ module Goose
         position
       end
 
-      def roll_again?
+      def roll_again?(_)
         false
       end
     end

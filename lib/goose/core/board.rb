@@ -20,9 +20,9 @@ module Goose
         @fields[new_position].apply_field_rule(new_position, move)
       end
 
-      def roll_again?(position)
+      def roll_again?(position, dice_value)
         return false if position >= size
-        @fields[position].roll_again?
+        @fields[position].roll_again? dice_value
       end
     end
   end

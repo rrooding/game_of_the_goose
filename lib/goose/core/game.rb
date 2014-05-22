@@ -26,7 +26,7 @@ module Goose
         moves = dice.roll
         current_player.position = @board.next_position current_player.position,
                                                        moves
-        end_turn unless @board.roll_again? current_player.position
+        end_turn unless @board.roll_again? current_player.position, moves
       end
 
       def end_turn
