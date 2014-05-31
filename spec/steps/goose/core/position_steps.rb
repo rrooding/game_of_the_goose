@@ -16,11 +16,12 @@ steps_for :core do
        'is :player_name weer aan de beurt om te dobbelen'
 
   # poin position
-  step 'staat de paarse pion op het :position vakje' do |position|
+  step 'staat de :color pion op het :position vakje' do |color, position|
     position = position.to_i
+    color = color[0..-2] # remove trailing "e"
 
     players = @game.players
-    player = players.for_color('paars')
+    player = players.for_color(color)
 
     expect(player.position).to eq position
   end

@@ -1,4 +1,5 @@
 # language: nl
+@core
 Functionaliteit: Ga naar vakje
   Brug: "Je kunt de rivier oversteken. Ga verder naar X"
   Vogelkooi: "Er is een vogel weggevlogen. Om hem te vangen moet je terug naar X"

@@ -22,6 +22,11 @@ module Goose
         @current_player || starting_player
       end
 
+      def move_poin(color, position)
+        player = players.for_color(color)
+        player.position = position
+      end
+
       def turn(dice = Dice.new)
         moves = dice.roll
         current_player.position = @board.next_position current_player.position,

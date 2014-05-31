@@ -22,7 +22,6 @@ module Goose
 
       def roll_again?(position, dice_value)
         return false if position >= size
-        puts @fields[position].inspect
         @fields[position].roll_again? dice_value
       end
     end

@@ -35,10 +35,24 @@ steps_for :core do
     end
   end
 
-  # Board / field
-  step 'het :position vakje is een ganzenvakje' do |position|
-    @game.board.field_type_at position.to_i
+  step 'de pionnen staan als volgt opgesteld:' do |table|
+    table.hashes.each do |hash|
+      @game.move_poin(hash['pion'], hash['vakje'].to_i)
+    end
   end
+
+  FIELD_TYPES = {
+      'ganzenvakje' => Goose::Core::GooseField.new,
+      'brug' => Goose::Core::BridgeField.new
+  }
+
+  def set_field_type(position, type)
+    @game.board.field_type_at position.to_i, FIELD_TYPES[type]
+  end
+  # Board / field
+
+  step :set_field_type, 'het :position vakje is een :type'
+  step :set_field_type, 'op het :position vakje is een :type'
 
   step 'op het :position vakje mag je nogmaals dobbelen' do |position|
     @roll_again_field = Goose::Core::RollDiceAgainField.new
@@ -48,4 +62,9 @@ steps_for :core do
   step 'alleen als je minder dan :dice_value had gegooid' do |dice_value|
     @roll_again_field.dice_upper_limit dice_value.to_i
   end
+
+  step 'daar mag je verder naar vakje 15' do
+    # part of field type
+  end
+
 end
