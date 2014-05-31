@@ -1,8 +1,8 @@
 module Goose
   module Core
-    class BridgeField < RegularField
-      def apply_field_rule(_, _)
-        15
+    class BridgeField < FixedMovementField
+      def initialize
+        super 15
       end
     end
   end

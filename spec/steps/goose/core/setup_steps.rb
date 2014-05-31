@@ -68,4 +68,8 @@ steps_for :core do
     # part of field type
   end
 
+  step 'op het :position vakje mag je naar vakje :destination' do |position, destination|
+    @game.board.field_type_at(position.to_i, Goose::Core::FixedMovementField.new(destination.to_i))
+  end
+
 end

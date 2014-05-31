@@ -1,8 +1,8 @@
 module Goose
   module Core
-    class BirdCageField < RegularField
-      def apply_field_rule(_, _)
-        9
+    class BirdCageField < FixedMovementField
+      def initialize
+        super 9
       end
     end
   end
