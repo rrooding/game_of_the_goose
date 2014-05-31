@@ -43,7 +43,8 @@ steps_for :core do
 
   FIELD_TYPES = {
       'ganzenvakje' => Goose::Core::GooseField.new,
-      'brug' => Goose::Core::BridgeField.new
+      'brug' => Goose::Core::BridgeField.new,
+      'vogelkooi' => Goose::Core::BirdCageField.new
   }
 
   def set_field_type(position, type)
@@ -63,7 +64,7 @@ steps_for :core do
     @roll_again_field.dice_upper_limit dice_value.to_i
   end
 
-  step 'daar mag je verder naar vakje 15' do
+  step 'daar :x je :direction naar vakje :target' do |x, direction, target|
     # part of field type
   end
 

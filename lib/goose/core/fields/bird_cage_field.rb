@@ -1,8 +1,8 @@
 module Goose
   module Core
-    class BridgeField < RegularField
+    class BirdCageField < RegularField
       def apply_field_rule(_, _)
-        15
+        9
       end
     end
   end
