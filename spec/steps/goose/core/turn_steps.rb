@@ -14,26 +14,9 @@ steps_for :core do
     @dices[player] = double(roll: number.to_i)
   end
 
-  step 'het :position vakje is een ganzenvakje' do |position|
-    @game.board.field_type_at position.to_i
-  end
-
-  step 'staat de paarse pion op het :position vakje' do |position|
-    position = position.to_i
-
-    players = @game.players
-    player = players.for_color('paars')
-
-    expect(player.position).to eq position
-  end
-
-  step 'is de bord opstelling als volgt:' do |table|
-    players = @game.players
-
-    table.hashes.each do |hash|
-      player = players.for_color(hash['pion'])
-      expect(player.position).to eq hash['vakje'].to_i
-    end
+  step 'de beurt van :player_name is geweest' do |player_name|
+    assert_current_player(player_name)
+    @game.end_turn
   end
 
   step 'er 11 speelrondes zijn gespeeld' do
