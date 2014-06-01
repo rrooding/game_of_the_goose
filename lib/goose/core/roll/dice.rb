@@ -2,7 +2,7 @@ module Goose
   module Core
     class Dice
       def roll
-        0
+        Goose::Core::EmptyRoll.new
       end
     end
   end

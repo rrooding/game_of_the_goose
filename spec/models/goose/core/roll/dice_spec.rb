@@ -5,7 +5,7 @@ describe Goose::Core::Dice do
 
   describe '#roll' do
     it 'is an integer' do
-      expect(subject.roll).to be_an Integer
+      expect(subject.roll).to be_an Goose::Core::Roll
     end
   end
 end
