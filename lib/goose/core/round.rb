@@ -20,6 +20,11 @@ class Round
     update_round_status
   end
 
+  # hand of god
+  def select_current_player(player)
+    @current_player = player
+  end
+
   private
 
   def next_player

@@ -1,9 +1,10 @@
 steps_for :core do
 
   def select_current_player(player)
-    while @game.current_player.name != player
-      @game.end_turn
-    end
+    players = @game.players
+    player = players.for_name(player)
+
+    @game.select_current_player player
   end
 
   step ':player :number dobbelt' do |player, number|
@@ -24,7 +25,7 @@ steps_for :core do
 
   step 'de beurt van :player_name is geweest' do |player_name|
     assert_current_player(player_name)
-    @game.end_turn
+    @game.roll_dice Goose::Core::FixedDice.new
   end
 
   step 'er 11 speelrondes zijn gespeeld' do

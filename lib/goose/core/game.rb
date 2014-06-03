@@ -27,21 +27,22 @@ module Goose
         @round.current_player
       end
 
+      def roll_dice(dice = SingleDice.new)
+        play_turn(dice.roll)
+      end
+
+      def winner
+        @players.select { |p| p.position >= @board.size }.first
+      end
+
+      # hand of god functions
       def move_poin(color, position)
         player = players.for_color(color)
         player.position = position
       end
 
-      def roll_dice(dice = SingleDice.new)
-        play_turn(dice.roll)
-      end
-
-      def end_turn
-        @round.end_turn
-      end
-
-      def winner
-        @players.select { |p| p.position >= @board.size }.first
+      def select_current_player(player)
+        @round.select_current_player player
       end
 
       private
@@ -51,6 +52,10 @@ module Goose
         player.position = @board.next_position player.position,
                                                roll
         end_turn unless @board.roll_again? player.position, roll
+      end
+
+      def end_turn
+        @round.end_turn
       end
     end
   end
