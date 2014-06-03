@@ -1,13 +1,21 @@
 module Goose
   module Core
     # responsible for the turns
+    class Round
+      attr_accessor :count
+
+      def  initialize
+        @count = 0
+      end
+    end
+
     class Game
       attr_reader :board, :round
 
       def initialize(board = Board.new)
         @board = board
         @players = Players.new
-        @round = 0
+        @round = Round.new
       end
 
       def add_player(name, age, color)
@@ -53,7 +61,7 @@ module Goose
       private
 
       def update_round
-        @round += 1 if starting_player == current_player
+        @round.count += 1 if starting_player == current_player
       end
 
       def next_player

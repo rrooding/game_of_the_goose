@@ -28,7 +28,7 @@ steps_for :core do
   end
 
   step 'er 11 speelrondes zijn gespeeld' do
-    while @game.round < 11
+    while @game.round.count < 11
       @game.play_turn(@dices[@game.current_player.name] ||  Goose::Core::EmptyRoll.new)
     end
   end
