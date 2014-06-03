@@ -16,4 +16,18 @@ describe Goose::Core::Roll do
       end
     end
   end
+
+  context 'multi dice' do
+    let(:dice_values) { [4, 3] }
+
+    describe '#total' do
+      it 'is an integer' do
+        expect(subject.total).to be_an Integer
+      end
+
+      it 'has the single rolled value' do
+        expect(subject.total).to eql(7)
+      end
+    end
+  end
 end
