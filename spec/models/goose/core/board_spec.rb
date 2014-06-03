@@ -21,28 +21,10 @@ describe Goose::Core::Board do
     let(:move) { 5 }
     let(:new_position) { subject.next_position(position, move) }
 
-    context 'landing on regular field' do
-
-      it 'the new position is equal to move' do
-        expect(new_position).to eq position + move
-      end
-    end
-
     context 'landing on field field beyond board length' do
       let(:move) { subject.size }
       it 'the new position is to max board length' do
         expect(new_position).to eq subject.size
-      end
-    end
-
-
-    context 'landing on goose field' do
-      before do
-        subject.goose_at(position + move)
-      end
-
-      it 'the new position is equal to twice the move' do
-        expect(new_position).to eq position + (move * 2)
       end
     end
   end
