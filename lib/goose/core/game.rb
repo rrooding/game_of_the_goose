@@ -27,11 +27,14 @@ module Goose
         player.position = position
       end
 
-      def turn(dice = Dice.new)
-        moves = dice.roll
+      def turn(dice = SingleDice.new)
+        play_turn(dice.roll)
+      end
+
+      def play_turn(roll)
         current_player.position = @board.next_position current_player.position,
-                                                       moves
-        end_turn unless @board.roll_again? current_player.position, moves
+                                                       roll
+        end_turn unless @board.roll_again? current_player.position, roll
       end
 
       def end_turn

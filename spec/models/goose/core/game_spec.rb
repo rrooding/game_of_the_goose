@@ -13,14 +13,14 @@ describe Goose::Core::Game do
 
     context 'landing on regular position' do
       it 'moves the specified amount of steps' do
-        dice = double(roll: 4)
+        roll = Goose::Core::Roll.new 4
 
-        expect { subject.turn dice }.to \
+        expect { subject.play_turn roll }.to \
           change { current_player.position }.by(4)
       end
 
       it 'ends the turn of the current player' do
-        subject.turn
+        subject.play_turn Goose::Core::EmptyRoll.new
         expect(subject.current_player).to_not eql current_player
       end
     end

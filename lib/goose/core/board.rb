@@ -14,14 +14,14 @@ module Goose
         @fields[position] = field
       end
 
-      def next_position(start, move)
-        new_position = start + move
-        apply_Field(new_position, move)
+      def next_position(start, roll)
+        new_position = start + roll.total
+        apply_Field(new_position, roll)
       end
 
-      def roll_again?(position, dice_value)
+      def roll_again?(position, roll)
         return false if position >= size
-        @fields[position].roll_again? dice_value
+        @fields[position].roll_again? roll
       end
 
       private
