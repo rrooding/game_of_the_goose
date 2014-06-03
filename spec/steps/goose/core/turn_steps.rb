@@ -9,8 +9,8 @@ steps_for :core do
   step ':player :number dobbelt' do |player, number|
     select_current_player(player)
 
-    roll = Goose::Core::Roll.new number.to_i
-    @game.play_turn roll
+    dice = Goose::Core::FixedDice.new number.to_i
+    @game.roll_dice dice
   end
 
   step ':player is aan de beurt om te dobbelen' do |player|
@@ -19,7 +19,7 @@ steps_for :core do
 
   step ':player gooit altijd :number met de dobbelsteen' do |player , number|
     @dices = {}
-    @dices[player] = Goose::Core::Roll.new number.to_i
+    @dices[player] = Goose::Core::FixedDice.new number.to_i
   end
 
   step 'de beurt van :player_name is geweest' do |player_name|
@@ -29,7 +29,7 @@ steps_for :core do
 
   step 'er 11 speelrondes zijn gespeeld' do
     while @game.current_round < 11
-      @game.play_turn(@dices[@game.current_player.name] ||  Goose::Core::EmptyRoll.new)
+      @game.roll_dice(@dices[@game.current_player.name] ||  Goose::Core::FixedDice.new)
     end
   end
 

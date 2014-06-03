@@ -83,7 +83,7 @@ module Goose
       MSG_ROLE = 'Speler %s is ge-eindigd op: %d'
       def play_turn_step
         player = @game.current_player
-        @game.turn()
+        @game.roll_dice()
         print_line(sprintf(MSG_ROLE, player.name, player.position))
         next_turn
       end
