@@ -1,12 +1,20 @@
 steps_for :core do
-  step ':player :number dobbelt' do |player, number|
+
+  def select_current_player(player)
     while @game.current_player.name != player
-      dice = double(roll: 0)
-      @game.turn dice
+      @game.end_turn
     end
+  end
+
+  step ':player :number dobbelt' do |player, number|
+    select_current_player(player)
 
     dice = double(roll: number.to_i)
     @game.turn dice
+  end
+
+  step ':player is aan de beurt om te dobbelen' do |player|
+    select_current_player(player)
   end
 
   step ':player gooit altijd :number met de dobbelsteen' do |player , number|

@@ -16,14 +16,21 @@ module Goose
 
       def next_position(start, move)
         new_position = start + move
-        return size if new_position > size
-        @fields[new_position].apply_field_rule(new_position, move)
+        apply_Field(new_position, move)
       end
 
       def roll_again?(position, dice_value)
         return false if position >= size
-        puts @fields[position].inspect
         @fields[position].roll_again? dice_value
+      end
+
+      private
+
+      def apply_Field(new_position, move)
+        return size if new_position >= size
+        final_position = @fields[new_position].apply_field_rule(new_position, move)
+        final_position = apply_Field(final_position, move) if final_position != new_position
+        final_position
       end
     end
   end
