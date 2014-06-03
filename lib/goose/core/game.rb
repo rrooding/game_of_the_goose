@@ -4,18 +4,47 @@ module Goose
     class Round
       attr_accessor :count
 
-      def  initialize
+      def  initialize(players)
         @count = 0
+        @players = players
+      end
+
+      def starting_player
+        @players.youngest_player
+      end
+
+      def current_player
+        @current_player || starting_player
+      end
+
+      def end_turn
+        @current_player = next_player
+        update_round_status
+      end
+
+      private
+
+      def next_player
+        i = @players.index(current_player)
+        @players[next_index(i)]
+      end
+
+      def next_index(i)
+        (i + 1) % @players.length
+      end
+
+      def update_round_status
+        @count += 1 if starting_player == current_player
       end
     end
 
     class Game
-      attr_reader :board, :round
+      attr_reader :board
 
       def initialize(board = Board.new)
         @board = board
         @players = Players.new
-        @round = Round.new
+        @round = Round.new @players
       end
 
       def add_player(name, age, color)
@@ -26,8 +55,12 @@ module Goose
         @players.clone.freeze
       end
 
+      def current_round
+        @round.count
+      end
+
       def current_player
-        @current_player || starting_player
+        @round.current_player
       end
 
       def move_poin(color, position)
@@ -40,37 +73,18 @@ module Goose
       end
 
       def play_turn(roll)
-        current_player.position = @board.next_position current_player.position,
+        player = @round.current_player
+        player.position = @board.next_position player.position,
                                                        roll
-        end_turn unless @board.roll_again? current_player.position, roll
+        end_turn unless @board.roll_again? player.position, roll
       end
 
       def end_turn
-        @current_player = next_player
-        update_round
-      end
-
-      def starting_player
-        @players.youngest_player
+        @round.end_turn
       end
 
       def winner
         @players.select { |p| p.position >= @board.size }.first
-      end
-
-      private
-
-      def update_round
-        @round.count += 1 if starting_player == current_player
-      end
-
-      def next_player
-        i = @players.index(current_player)
-        @players[next_index(i)]
-      end
-
-      def next_index(i)
-        (i + 1) % @players.length
       end
     end
   end

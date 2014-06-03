@@ -75,7 +75,7 @@ module Goose
 
       MSG_ROUND = 'Ronde: '
       def play_round_step
-        @round = @game.round.count
+        @round = @game.current_round
         print_line(MSG_ROUND + @round.to_s)
         play_turn_step
       end
@@ -90,7 +90,7 @@ module Goose
 
       def next_turn
         if @game.winner.nil?
-          @round == @game.round.count ? play_turn_step : pause_for_next_round
+          @round == @game.current_round ? play_turn_step : pause_for_next_round
         else
           game_ended_step
         end
