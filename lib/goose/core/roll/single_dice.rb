@@ -1,8 +1,8 @@
 module Goose
   module Core
-    class Dice
+    class SingleDice
       def roll
-        Goose::Core::EmptyRoll.new
+        Goose::Core::Roll.new Random.new.rand(6)
       end
     end
   end

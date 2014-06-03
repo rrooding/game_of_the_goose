@@ -27,7 +27,7 @@ module Goose
         player.position = position
       end
 
-      def turn(dice = Dice.new)
+      def turn(dice = SingleDice.new)
         play_turn(dice.roll)
       end
 
