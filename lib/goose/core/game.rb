@@ -1,7 +1,5 @@
 module Goose
   module Core
-
-
     class Game
       attr_reader :board
 
@@ -48,10 +46,21 @@ module Goose
       private
 
       def play_turn(roll)
-        player = @round.current_player
-        player.position = @board.next_position player.position,
-                                               roll
-        end_turn unless @board.roll_again? player.position, roll
+        player_position = current_player.position + roll.total
+        field = update_pos roll, player_position
+
+        puts field.inspect
+        end_turn unless field.roll_again? roll
+      end
+
+      def update_pos(roll, player_position)
+        field = board.field(player_position)
+
+        update_position = field.apply_field_rule player_position, roll
+        current_player.position = update_position
+        return update_pos(roll, update_position) if player_position != update_position
+
+        field
       end
 
       def end_turn
