@@ -46,21 +46,10 @@ module Goose
       private
 
       def play_turn(roll)
-        player_position = current_player.position + roll.total
-        field = update_pos roll, player_position
-
-        puts field.inspect
-        end_turn unless field.roll_again? roll
-      end
-
-      def update_pos(roll, player_position)
-        field = board.field(player_position)
-
-        update_position = field.apply_field_rule player_position, roll
-        current_player.position = update_position
-        return update_pos(roll, update_position) if player_position != update_position
-
-        field
+        action = RollAction.new @board, current_player.position
+        action.move(roll)
+        current_player.position = action.update_position
+        end_turn unless action.roll_again?
       end
 
       def end_turn
