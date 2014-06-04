@@ -1,9 +1,7 @@
 steps_for :core do
 
   def select_current_player(player)
-    while @game.current_player.name != player
-      @game.end_turn
-    end
+    @game.end_turn while @game.current_player.name != player
   end
 
   step ':player :number dobbelt' do |player, number|
