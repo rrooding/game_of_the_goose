@@ -49,11 +49,12 @@ module Goose
         action = RollAction.new @board, current_player.position
         action.move(roll)
         current_player.position = action.update_position
+        current_player.skip_turns = action.skip_turns
         end_turn unless action.roll_again?
       end
 
       def end_turn
-        @round.end_turn
+        @round.select_next_player
       end
     end
   end

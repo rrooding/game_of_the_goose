@@ -1,42 +1,60 @@
-# responsible for the turns
-class Round
-  attr_accessor :count
+module Goose
+  module Core
+    # responsible for the turns
+    class Round
+      attr_reader :count
 
-  def  initialize(players)
-    @count = 0
-    @players = players
-  end
+      def initialize(players)
+        @count = 0
+        @players = players
+      end
 
-  def starting_player
-    @players.youngest_player
-  end
+      def current_player
+        @current_player || starting_player
+      end
 
-  def current_player
-    @current_player || starting_player
-  end
+      def starting_player
+        @players.youngest_player
+      end
 
-  def end_turn
-    @current_player = next_player
-    update_round_status
-  end
+      def select_next_player
+       begin
+         @current_player = next_player
+       end  while player_skips_turn?
 
-  # hand of god
-  def select_current_player(player)
-    @current_player = player
-  end
+        update_round_status
+      end
 
-  private
+      # hand of god
+      def select_current_player(player)
+        @current_player = player
+      end
 
-  def next_player
-    i = @players.index(current_player)
-    @players[next_index(i)]
-  end
+      private
 
-  def next_index(i)
-    (i + 1) % @players.length
-  end
+      def next_player
+        i = @players.index(current_player)
+        @players[next_index(i)]
+      end
 
-  def update_round_status
-    @count += 1 if starting_player == current_player
+      def next_index(i)
+        (i + 1) % @players.length
+      end
+
+      def update_round_status
+        @count += 1 if starting_player == current_player
+      end
+
+      def player_skips_turn?
+        if current_player.skip_turn?
+          current_player.turn_skipped
+          return true
+        end
+
+        false
+      end
+    end
   end
 end
+
+

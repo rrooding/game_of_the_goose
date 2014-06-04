@@ -15,6 +15,10 @@ module Goose
         new_player
       end
 
+      def add(new_player)
+        push new_player
+      end
+
       def youngest_player
         by_age_asc.first
       end
