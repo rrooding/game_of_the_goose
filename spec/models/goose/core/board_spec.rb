@@ -18,12 +18,11 @@ describe Goose::Core::Board do
 
   describe 'Next position' do
     let(:position) { 1 }
-    let(:new_position) { subject.next_position(position, roll) }
+    let(:field) { subject.field(position + subject.size) }
 
     context 'landing on field field beyond board length' do
-      let(:roll) { Goose::Core::Roll.new subject.size }
       it 'the new position is to max board length' do
-        expect(new_position).to eq subject.size
+        expect(field).to be_a(Goose::Core::BounceField)
       end
     end
   end
