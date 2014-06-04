@@ -30,4 +30,8 @@ steps_for :core do
     position = position.to_i
     @game.roll_dice(Goose::Core::FixedDice.new position)
   end
+
+  step 'daar moet je :skip_turns beurt/beurten overslaan' do |skip_turns|
+
+  end
 end
