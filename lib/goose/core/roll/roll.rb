@@ -12,7 +12,7 @@ module Goose
       private
 
       def sum(array)
-        array.inject{|sum,x| sum + x }
+        array.reduce { |a, e| a + e }
       end
 
       def array_wrap(object)

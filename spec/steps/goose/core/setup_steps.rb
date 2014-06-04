@@ -42,16 +42,16 @@ steps_for :core do
   end
 
   FIELD_TYPES = {
-      'ganzenvakje' => Goose::Core::GooseField.new,
-      'brug' => Goose::Core::BridgeField.new,
-      'vogelkooi' => Goose::Core::BirdCageField.new
+    'ganzenvakje' => Goose::Core::GooseField.new,
+    'brug' => Goose::Core::BridgeField.new,
+    'vogelkooi' => Goose::Core::BirdCageField.new
   }
 
   def set_field_type(position, type)
     @game.board.field_type_at position.to_i, FIELD_TYPES[type]
   end
-  # Board / field
 
+  # Board / field
   step :set_field_type, 'het :position vakje is een :type'
   step :set_field_type, 'op het :position vakje is een :type'
 
@@ -64,12 +64,14 @@ steps_for :core do
     @roll_again_field.dice_upper_limit dice_value.to_i
   end
 
-  step 'daar :x je :direction naar vakje :target' do |x, direction, target|
+  step 'daar :x je :direction naar vakje :target' do |_, _, _|
     # part of field type
   end
 
   step 'op het :position vakje mag je naar vakje :destination' do |position, destination|
-    @game.board.field_type_at(position.to_i, Goose::Core::FixedMovementField.new(destination.to_i))
+    @game.board.field_type_at(
+        position.to_i,
+        Goose::Core::FixedMovementField.new(destination.to_i)
+    )
   end
-
 end
