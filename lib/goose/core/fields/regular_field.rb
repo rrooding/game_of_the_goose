@@ -8,6 +8,10 @@ module Goose
       def roll_again?(_)
         false
       end
+
+      def skip_turns
+        0
+      end
     end
   end
 end

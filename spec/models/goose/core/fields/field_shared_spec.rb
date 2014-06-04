@@ -20,5 +20,13 @@ RSpec.shared_examples 'a field' do
         expect(roll_again).to eql may_roll_again
       end
     end
+
+    describe '#skip_turns' do
+      let(:skip_turns) { subject.skip_turns }
+
+      it 'validate roll again' do
+        expect(skip_turns).to eql turns_to_skip
+      end
+    end
   end
 end
