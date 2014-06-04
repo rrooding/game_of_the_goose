@@ -3,7 +3,6 @@ require 'goose/core'
 module Goose
   module Console
     class Game
-
       def initialize
         @game = Goose::Core::Game.new
         @poins = [:rood, :groen, :geel, :zwart, :green, :wit]
@@ -12,19 +11,19 @@ module Goose
       MSG_WELCOME = 'Welkom bij gansebord.'
       def start_app
         print_line(MSG_WELCOME)
-        add_players_step(MSG_ADD_PlAYERS)
+        add_players_step(MSG_ADD_PLAYERS)
       end
 
-      MSG_ADD_PlAYERS = 'Wie speelt er mee?'
+      MSG_ADD_PLAYERS = 'Wie speelt er mee?'
       MSG_ADD_PLAYERS_ONE_NEEDED = 'Minimaal 1 speler nodig.'
       def add_players_step(msg)
         print_line(msg)
         ask_player_name
       end
 
-      MSG_ASK_PlAYER_NAME = 'Naam: '
-      def ask_player_name()
-        print(MSG_ASK_PlAYER_NAME)
+      MSG_ASK_PLAYER_NAME = 'Naam: '
+      def ask_player_name
+        print(MSG_ASK_PLAYER_NAME)
         user_input_for(-> (input) { player_name(input) })
       end
 
@@ -37,9 +36,9 @@ module Goose
         end
       end
 
-      MSG_ASK_PlAYER_AGE = 'Leeftijd: '
+      MSG_ASK_PLAYER_AGE = 'Leeftijd: '
       def ask_player_age
-        print(MSG_ASK_PlAYER_AGE)
+        print(MSG_ASK_PLAYER_AGE)
         user_input_for(-> (input) { player_age(input) })
       end
 
@@ -83,8 +82,8 @@ module Goose
       MSG_ROLE = 'Speler %s is ge-eindigd op: %d'
       def play_turn_step
         player = @game.current_player
-        @game.turn()
-        print_line(sprintf(MSG_ROLE, player.name, player.position))
+        @game.turn
+        print_line(format(MSG_ROLE, player.name, player.position))
         next_turn
       end
 
@@ -97,13 +96,13 @@ module Goose
       end
 
       def pause_for_next_round
-        user_input_for(-> (input) { play_round_step })
+        user_input_for(-> (_) { play_round_step })
       end
 
       MSG_WINNAR = 'De winnaar is: %s'
       def game_ended_step
-        print_line(sprintf(MSG_WINNAR, @game.winner.name))
-        user_input_for(-> (input) { end_app })
+        print_line(format(MSG_WINNAR, @game.winner.name))
+        user_input_for(-> (_) { end_app })
       end
     end
   end

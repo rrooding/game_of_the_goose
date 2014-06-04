@@ -8,10 +8,8 @@ module Goose
       end
 
       def run
-        start_app()
-        while (!finished?)
-          execute_user_input(get_user_input)
-        end
+        start_app
+        execute_user_input(user_input) while finished?
       end
 
       def execute_user_input(msg)
@@ -42,7 +40,7 @@ module Goose
 
       private
 
-      def get_user_input()
+      def user_input
         @input.gets
       end
     end
