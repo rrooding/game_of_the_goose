@@ -1,2 +1,9 @@
 Documentation:
   Enabled: false
+
+
+LineLength:
+ Max: 90
+
+TrivialAccessors:
+  Enabled: false
