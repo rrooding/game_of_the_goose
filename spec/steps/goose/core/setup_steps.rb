@@ -47,11 +47,14 @@ steps_for :core do
     'vogelkooi' => Goose::Core::BirdCageField.new,
     'hotel' => Goose::Core::SkipTurnField.new(1),
     'motel' => Goose::Core::SkipTurnField.new(1),
-    'holiday inn' => Goose::Core::SkipTurnField.new(2)
+    'holiday inn' => Goose::Core::SkipTurnField.new(2),
   }
 
   def set_field_type(position, type)
-    @game.board.field_type_at position.to_i, FIELD_TYPES[type]
+    field = FIELD_TYPES[type]
+    #throw StandardError.new "Add support for field tyep #{type}" if field.nil?
+    pending "Add support for field type #{type}" if field.nil?
+    @game.board.field_type_at position.to_i, field
   end
 
   # Board / field
