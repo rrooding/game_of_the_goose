@@ -1,7 +1,5 @@
 module Goose
   module Core
-
-
     class Game
       attr_reader :board
 
