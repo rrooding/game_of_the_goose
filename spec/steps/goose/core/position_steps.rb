@@ -28,6 +28,6 @@ steps_for :core do
 
   step 'de blauwe pion staat op het :position vakje' do |position|
     position = position.to_i
-    @game.roll_dice( Goose::Core::FixedDice.new position)
+    @game.roll_dice(Goose::Core::FixedDice.new position)
   end
 end

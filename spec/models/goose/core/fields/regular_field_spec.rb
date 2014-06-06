@@ -31,8 +31,8 @@ describe Goose::Core::RollDiceAgainField do
   context 'with limit' do
     let(:may_roll_again) { false }
 
-    before() do
-      subject.dice_upper_limit (roll.total-1)
+    before do
+      subject.dice_upper_limit(roll.total - 1)
     end
 
     it_behaves_like 'a field'
