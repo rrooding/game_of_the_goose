@@ -18,6 +18,10 @@ module Goose
         @field.roll_again? @roll
       end
 
+      def skip_turns
+        @field.skip_turns
+      end
+
       private
 
       def apply_board_action

@@ -44,7 +44,10 @@ steps_for :core do
   FIELD_TYPES = {
     'ganzenvakje' => Goose::Core::GooseField.new,
     'brug' => Goose::Core::BridgeField.new,
-    'vogelkooi' => Goose::Core::BirdCageField.new
+    'vogelkooi' => Goose::Core::BirdCageField.new,
+    'hotel' => Goose::Core::SkipTurnField.new(1),
+    'motel' => Goose::Core::SkipTurnField.new(1),
+    'holiday inn' => Goose::Core::SkipTurnField.new(2)
   }
 
   def set_field_type(position, type)
