@@ -27,7 +27,6 @@ describe 'field types' do
 
     context 'default' do
       let(:may_roll_again) { true }
-
       it_behaves_like 'a field'
     end
 
