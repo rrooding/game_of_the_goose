@@ -14,23 +14,16 @@ module Goose
         @fields[position] = field
       end
 
-      def next_position(start, roll)
-        new_position = start + roll.total
-        apply_field(new_position, roll)
-      end
-
-      def roll_again?(position, roll)
-        return false if position >= size
-        @fields[position].roll_again? roll
+      def field(position)
+        bounce = over_shoot position
+        return BounceField.new bounce if bounce >= 0
+        @fields[position]
       end
 
       private
 
-      def apply_field(new_position, move)
-        return size if new_position >= size
-        final_position = @fields[new_position].apply_field_rule(new_position, move)
-        final_position = apply_field(final_position, move) if final_position != new_position
-        final_position
+      def over_shoot(position)
+        position - size
       end
     end
   end

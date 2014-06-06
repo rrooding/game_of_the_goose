@@ -6,11 +6,11 @@ module Goose
       end
 
       def roll_again?(roll)
-        true if roll.total < @dice_limit
+        roll.total < @dice_limit
       end
 
-      def dice_upper_limit(roll)
-        @dice_limit = roll.total
+      def dice_upper_limit(dice_value)
+        @dice_limit = dice_value
       end
     end
   end

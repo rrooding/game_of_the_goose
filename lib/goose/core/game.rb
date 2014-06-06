@@ -46,10 +46,10 @@ module Goose
       private
 
       def play_turn(roll)
-        player = @round.current_player
-        player.position = @board.next_position player.position,
-                                               roll
-        end_turn unless @board.roll_again? player.position, roll
+        action = RollAction.new @board, current_player.position
+        action.move(roll)
+        current_player.position = action.update_position
+        end_turn unless action.roll_again?
       end
 
       def end_turn

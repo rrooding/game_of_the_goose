@@ -61,7 +61,7 @@ steps_for :core do
   end
 
   step 'alleen als je minder dan :dice_value had gegooid' do |dice_value|
-    @roll_again_field.dice_upper_limit Goose::Core::Roll.new dice_value.to_i
+    @roll_again_field.dice_upper_limit dice_value.to_i
   end
 
   step 'daar :x je :direction naar vakje :target' do |_, _, _|
