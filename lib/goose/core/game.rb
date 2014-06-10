@@ -50,7 +50,7 @@ module Goose
         action.play
 
         # TODO - move into turn and possible field
-        current_player.position = action.update_position
+        current_player.position = action.new_position
         current_player.skip_turns = action.skip_turns
 
         end_turn unless action.roll_again?

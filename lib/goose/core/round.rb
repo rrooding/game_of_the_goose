@@ -45,6 +45,7 @@ module Goose
         @count += 1 if starting_player == current_player
       end
 
+      # dirty - query and action
       def player_skips_turn?
         if current_player.skip_turn?
           current_player.turn_skipped

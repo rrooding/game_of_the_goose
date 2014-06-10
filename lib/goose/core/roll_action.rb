@@ -1,8 +1,6 @@
 module Goose
   module Core
     class RollAction
-      # attr_reader :update_position
-
       def initialize(board, all_pawns, current_pawn, roll)
         @board = board
         @all_pawns = all_pawns
@@ -15,7 +13,7 @@ module Goose
         apply_board_actions
       end
 
-      def update_position
+      def new_position
         @next_position
       end
 
