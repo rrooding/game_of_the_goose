@@ -18,9 +18,9 @@ module Goose
       end
 
       def select_next_player
-       begin
-         @current_player = next_player
-       end  while player_skips_turn?
+        begin
+          @current_player = next_player
+        end  while player_skips_turn?
 
         update_round_status
       end
@@ -56,5 +56,3 @@ module Goose
     end
   end
 end
-
-

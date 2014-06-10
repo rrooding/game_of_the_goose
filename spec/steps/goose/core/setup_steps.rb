@@ -48,11 +48,11 @@ steps_for :core do
     'hotel' => Goose::Core::SkipTurnField.new(1),
     'motel' => Goose::Core::SkipTurnField.new(1),
     'holiday inn' => Goose::Core::SkipTurnField.new(2),
+    'bokkesprong' => Goose::Core::GoatField.new
   }
 
   def set_field_type(position, type)
     field = FIELD_TYPES[type]
-    #throw StandardError.new "Add support for field tyep #{type}" if field.nil?
     pending "Add support for field type #{type}" if field.nil?
     @game.board.field_type_at position.to_i, field
   end

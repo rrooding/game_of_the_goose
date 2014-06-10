@@ -3,12 +3,12 @@ require 'spec_helper'
 describe 'field types' do
   let(:may_roll_again) { false }
   let(:turns_to_skip) { 0 }
+  let(:position) { 1 }
 
   describe Goose::Core::RegularField do
     subject { described_class.new }
 
     let(:destination) { position }
-
 
     it_behaves_like 'a field'
   end
@@ -64,5 +64,22 @@ describe 'field types' do
     let(:destination) { position }
 
     it_behaves_like 'a field'
+  end
+
+  describe Goose::Core::GoatField do
+    subject { described_class.new }
+
+    describe 'poin move to poin ahead, landing one position in front' do
+      let(:destination) { next_player.position + 1 }
+
+      it_behaves_like 'a field'
+    end
+
+    describe 'poin stays in postion' do
+      let!(:position) { last_player.position + 1 }
+      let(:destination) { position }
+
+      it_behaves_like 'a field'
+    end
   end
 end

@@ -46,10 +46,13 @@ module Goose
       private
 
       def play_turn(roll)
-        action = RollAction.new @board, current_player.position
-        action.move(roll)
+        action = RollAction.new @board, players, current_player, roll
+        action.play
+
+        # TODO - move into turn and possible field
         current_player.position = action.update_position
         current_player.skip_turns = action.skip_turns
+
         end_turn unless action.roll_again?
       end
 

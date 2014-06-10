@@ -1,17 +1,16 @@
 require 'spec_helper'
 
 describe Goose::Core::Round do
-  subject { described_class.new players}
-
+  subject { described_class.new players }
 
   let(:player1) { Goose::Core::Player.new('player1', 1, 'paars') }
   let(:player2) { Goose::Core::Player.new('player2', 0, 'groen') }
-  let(:players) {
+  let(:players) do
     p = Goose::Core::Players.new
     p.add player1
     p.add player2
     p
-  }
+  end
 
   it 'youngest player to start' do
     expect(subject.current_player).to eql(player2)

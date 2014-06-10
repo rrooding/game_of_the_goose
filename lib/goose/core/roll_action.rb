@@ -1,17 +1,22 @@
 module Goose
   module Core
     class RollAction
-      attr_reader :update_position
+      # attr_reader :update_position
 
-      def initialize(board, position)
+      def initialize(board, all_pawns, current_pawn, roll)
         @board = board
-        @update_position = position
+        @all_pawns = all_pawns
+        @roll = roll
+        @next_position = current_pawn.position
       end
 
-      def move(roll)
-        @roll = roll
-        @update_position += roll.total
-        apply_board_action
+      def play
+        apply_roll_move
+        apply_board_actions
+      end
+
+      def update_position
+        @next_position
       end
 
       def roll_again?
@@ -24,13 +29,17 @@ module Goose
 
       private
 
-      def apply_board_action
-        @player_position = @update_position
+      def apply_roll_move
+        @next_position += @roll.total
+      end
+
+      def apply_board_actions
+        @player_position = @next_position
 
         @field = @board.field(@player_position)
-        @update_position = @field.apply_field_rule @player_position, @roll
+        @next_position = @field.apply_field_rule @player_position, @roll, @all_pawns
 
-        apply_board_action if @player_position != @update_position
+        apply_board_actions if @player_position != @next_position
       end
     end
   end
