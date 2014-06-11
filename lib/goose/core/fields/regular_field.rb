@@ -12,6 +12,9 @@ module Goose
       def skip_turns
         0
       end
+
+      def apply_block(position, pawn, all_pawns)
+      end
     end
   end
 end

@@ -48,7 +48,8 @@ steps_for :core do
     'hotel' => Goose::Core::SkipTurnField.new(1),
     'motel' => Goose::Core::SkipTurnField.new(1),
     'holiday inn' => Goose::Core::SkipTurnField.new(2),
-    'bokkesprong' => Goose::Core::GoatField.new
+    'bokkesprong' => Goose::Core::GoatField.new,
+    'put' => Goose::Core::WellField.new
   }
 
   def set_field_type(position, type)
