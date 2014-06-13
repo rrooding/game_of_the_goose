@@ -1,5 +1,6 @@
 module Goose
   module Core
+    # game flow
     class Game
       attr_reader :board
 
@@ -46,8 +47,8 @@ module Goose
       private
 
       def play_turn(roll)
-        action = RollAction.new @board, players, current_player, roll
-        action.play
+        action = RollAction.new @board, players
+        action.play current_player, roll
         end_turn unless action.roll_again?
       end
 

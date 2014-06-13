@@ -1,23 +1,22 @@
 module Goose
   module Core
+    # turn flow, but instantiation would need to be different
     class RollAction
-      def initialize(board, all_pawns, current_pawn, roll)
+      def initialize(board, all_pawns)
         @board = board
         @all_pawns = all_pawns
-        @roll = roll
-        @current_pawn = current_pawn
-        @next_position = current_pawn.position
       end
 
-      def play
-        update_pawn_blocked_state_for_current_field_and_Roll
+      def play(current_pawn, roll)
+        @current_pawn = current_pawn
+        @roll = roll
+
+        update_pawn_blocked_state_for_current_field_and_roll
 
         unless @current_pawn.blocked
-          apply_roll_move
-          apply_board_moves
+          update_pawn_position_for_roll_move
+          update_pawn_for_board_rules
         end
-
-        update_pawn
       end
 
       def roll_again?
@@ -26,31 +25,23 @@ module Goose
 
       private
 
-      def update_pawn_blocked_state_for_current_field_and_Roll
+      def update_pawn_blocked_state_for_current_field_and_roll
         if @current_pawn.blocked
-          @field = @board.field(@next_position)
+          @field = @board.field(@current_pawn.position)
           @field.update_block(@current_pawn, @roll)
         end
       end
 
-      def apply_roll_move
-        @next_position += @roll.total
+      def update_pawn_position_for_roll_move
+        @current_pawn.position += @roll.total
       end
 
-      def apply_board_moves
-        player_position = @next_position
+      def update_pawn_for_board_rules
+        current_position = @current_pawn.position
 
-        @field = @board.field(player_position)
-        @next_position = @field.apply_field_rule player_position, @roll, @all_pawns
-
-        apply_board_moves if player_position != @next_position
-      end
-
-      def update_pawn
-        # TODO - move possible into field
-        @field.apply_block(@next_position, @current_pawn, @all_pawns)
-        @current_pawn.position = @next_position
-        @current_pawn.skip_turns = @field.skip_turns
+        @field = @board.field(@current_pawn.position)
+        @field.update_pawn @current_pawn, @roll, @all_pawns
+        update_pawn_for_board_rules if current_position != @current_pawn.position
       end
     end
   end
