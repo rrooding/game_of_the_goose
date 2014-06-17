@@ -1,6 +1,5 @@
 module Goose
   module Core
-    # turn flow, but instantiation would need to be different
     class RollAction
       def initialize(board, all_pawns)
         @board = board
