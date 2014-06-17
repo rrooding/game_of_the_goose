@@ -23,24 +23,27 @@ steps_for :core do
     end
   end
 
+  # pawns
+  step 'de pionnen staan als volgt opgesteld:' do |table|
+    table.hashes.each do |hash|
+      @game.move_pawn(hash['pion'], hash['vakje'].to_i)
+    end
+  end
+
+  step 'de :color pion staat op het :position vakje' do |color, position|
+    position = position.to_i
+    color = color[0..-2] # remove trailing "e"
+
+    @game.move_pawn(color, position)
+  end
+
   # Board
   step 'ik heb een speelbord met 63 vakjes' do
     @game = Goose::Core::Game.new
     expect(@game.board.size).to be(63)
   end
 
-  step 'alle pionnen staan op het startvakje' do
-    @game.players.each do |player|
-      expect(player.position).to eql(0)
-    end
-  end
-
-  step 'de pionnen staan als volgt opgesteld:' do |table|
-    table.hashes.each do |hash|
-      @game.move_poin(hash['pion'], hash['vakje'].to_i)
-    end
-  end
-
+  # Field
   FIELD_TYPES = {
     'ganzenvakje' => Goose::Core::GooseField.new,
     'brug' => Goose::Core::BridgeField.new,
@@ -58,7 +61,6 @@ steps_for :core do
     @game.board.field_type_at position.to_i, field
   end
 
-  # Board / field
   step :set_field_type, 'het :position vakje is een :type'
   step :set_field_type, 'op het :position vakje is een :type'
 
@@ -72,6 +74,10 @@ steps_for :core do
   end
 
   step 'daar :x je :direction naar vakje :target' do |_, _, _|
+    # part of field type
+  end
+
+  step 'daar moet je :skip_turns beurt/beurten overslaan' do |skip_turns|
     # part of field type
   end
 

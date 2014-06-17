@@ -69,13 +69,13 @@ describe 'field types' do
   describe Goose::Core::GoatField do
     subject { described_class.new }
 
-    describe 'poin move to poin ahead, landing one position in front' do
+    describe 'pawn move to poin ahead, landing one position in front' do
       let(:destination) { next_player.position + 1 }
 
       it_behaves_like 'a field'
     end
 
-    describe 'poin stays in postion' do
+    describe 'pawn stays in postion' do
       let!(:position) { last_player.position + 1 }
       let(:destination) { position }
 

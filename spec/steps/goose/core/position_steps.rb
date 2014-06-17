@@ -1,5 +1,4 @@
 steps_for :core do
-
   # player position
   def assert_current_player(player_name)
     expect(@game.current_player.name).to eql(player_name)
@@ -15,7 +14,13 @@ steps_for :core do
   step :assert_current_player,
        'is :player_name weer aan de beurt om te dobbelen'
 
-  # poin position
+  # pawn position
+  step 'alle pionnen staan op het startvakje' do
+    @game.players.each do |player|
+      expect(player.position).to eql(0)
+    end
+  end
+
   step 'staat de :color pion op het :position vakje' do |color, position|
     position = position.to_i
     color = color[0..-2] # remove trailing "e"
@@ -24,14 +29,5 @@ steps_for :core do
     player = players.for_color(color)
 
     expect(player.position).to eq position
-  end
-
-  step 'de blauwe pion staat op het :position vakje' do |position|
-    position = position.to_i
-    @game.roll_dice(Goose::Core::FixedDice.new position)
-  end
-
-  step 'daar moet je :skip_turns beurt/beurten overslaan' do |skip_turns|
-
   end
 end

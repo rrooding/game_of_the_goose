@@ -54,7 +54,7 @@ describe Goose::Console::Cli do
     expect(output.string).to start_with(Goose::Console::Game::MSG_ADD_PLAYERS_ONE_NEEDED)
   end
 
-  it 'Assigns poin color, after age' do
+  it 'Assigns pawn color, after age' do
     subject.start_app
     subject.execute_user_input('Fred')
     reset_output
