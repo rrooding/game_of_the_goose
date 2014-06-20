@@ -1,52 +1,46 @@
 module Goose
   module Core
     class RollAction
-      def initialize(board, all_pawns, current_pawn, roll)
+      def initialize(board, all_pawns)
         @board = board
         @all_pawns = all_pawns
-        @roll = roll
-        @current_pawn = current_pawn
-        @next_position = current_pawn.position
       end
 
-      def play
-        if @current_pawn.blocked
-         @field = @board.field(@next_position)
-         @field.update_block(@current_pawn, @roll)
-        end
+      def play(current_pawn, roll)
+        @current_pawn = current_pawn
+        @roll = roll
+
+        update_pawn_blocked_state_for_current_field_and_roll
 
         unless @current_pawn.blocked
-          apply_roll_move
-          apply_board_actions
+          update_pawn_position_for_roll_move
+          update_pawn_for_board_rules
         end
-      end
-
-      def new_position
-        @next_position
       end
 
       def roll_again?
         @field.roll_again? @roll
       end
 
-      def skip_turns
-        @field.skip_turns
-      end
-
       private
 
-      def apply_roll_move
-        @next_position += @roll.total
+      def update_pawn_blocked_state_for_current_field_and_roll
+        if @current_pawn.blocked
+          @field = @board.field(@current_pawn.position)
+          @field.update_block(@current_pawn, @roll)
+        end
       end
 
-      def apply_board_actions
-        @player_position = @next_position
+      def update_pawn_position_for_roll_move
+        @current_pawn.position += @roll.total
+      end
 
-        @field = @board.field(@player_position)
-        @next_position = @field.apply_field_rule @player_position, @roll, @all_pawns
+      def update_pawn_for_board_rules
+        current_position = @current_pawn.position
 
-        apply_board_actions if @player_position != @next_position
-        @field.apply_block(@player_position, @current_pawn, @all_pawns)
+        @field = @board.field(@current_pawn.position)
+        @field.update_pawn @current_pawn, @roll, @all_pawns
+        update_pawn_for_board_rules if current_position != @current_pawn.position
       end
     end
   end
