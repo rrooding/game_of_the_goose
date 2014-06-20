@@ -7,15 +7,22 @@ steps_for :core do
     @game.select_current_player player
   end
 
-  step ':player :number dobbelt' do |player, number|
+  # setup
+  step ':player is aan de beurt om te dobbelen' do |player|
     select_current_player(player)
+  end
+
+  step ':player gooit altijd :number met de dobbelsteen' do |player , number|
+    @dices = {}
+    @dices[player] = Goose::Core::FixedDice.new number.to_i
+  end
+
+  # roll
+  step ':player_name :number dobbelt' do |player_name, number|
+    assert_current_player(player_name)
 
     dice = Goose::Core::FixedDice.new number.to_i
     @game.roll_dice dice
-  end
-
-  step ':player is aan de beurt om te dobbelen' do |player|
-    select_current_player(player)
   end
 
   step ':player_name een ronde later :roll_value dobbelt' do |player_name, roll_value|
@@ -28,11 +35,7 @@ steps_for :core do
     @game.roll_dice Goose::Core::FixedDice.new roll_value.to_i
   end
 
-  step ':player gooit altijd :number met de dobbelsteen' do |player , number|
-    @dices = {}
-    @dices[player] = Goose::Core::FixedDice.new number.to_i
-  end
-
+  # result
   step 'de beurt van :player_name is geweest' do |player_name|
     assert_current_player(player_name)
     @game.roll_dice Goose::Core::FixedDice.new

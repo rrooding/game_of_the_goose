@@ -35,7 +35,7 @@ module Goose
       end
 
       # hand of god functions
-      def move_poin(color, position)
+      def move_pawn(color, position)
         player = players.for_color(color)
         player.position = position
       end
