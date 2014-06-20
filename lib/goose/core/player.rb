@@ -3,7 +3,7 @@ module Goose
     # TODO: PlayerPawnStat
     class Player
       attr_reader :name, :age, :color
-      attr_accessor :position, :skip_turns
+      attr_accessor :position, :skip_turns, :blocked
 
       def initialize(name, age, color)
         @name = name
@@ -11,6 +11,7 @@ module Goose
         @color = color
         @position = 0
         @skip_turns = 0
+        @blocked = false
       end
 
       def skip_turn?

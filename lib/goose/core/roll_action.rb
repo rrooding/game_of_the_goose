@@ -5,12 +5,20 @@ module Goose
         @board = board
         @all_pawns = all_pawns
         @roll = roll
+        @current_pawn = current_pawn
         @next_position = current_pawn.position
       end
 
       def play
-        apply_roll_move
-        apply_board_actions
+        if @current_pawn.blocked
+         @field = @board.field(@next_position)
+         @field.update_block(@current_pawn, @roll)
+        end
+
+        unless @current_pawn.blocked
+          apply_roll_move
+          apply_board_actions
+        end
       end
 
       def new_position
@@ -38,6 +46,7 @@ module Goose
         @next_position = @field.apply_field_rule @player_position, @roll, @all_pawns
 
         apply_board_actions if @player_position != @next_position
+        @field.apply_block(@player_position, @current_pawn, @all_pawns)
       end
     end
   end

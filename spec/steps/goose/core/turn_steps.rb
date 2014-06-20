@@ -18,6 +18,16 @@ steps_for :core do
     select_current_player(player)
   end
 
+  step ':player_name een ronde later :roll_value dobbelt' do |player_name, roll_value|
+    current_round = @game.current_round
+    while @game.current_round == current_round
+      @game.roll_dice(Goose::Core::FixedDice.new)
+    end
+
+    assert_current_player(player_name)
+    @game.roll_dice Goose::Core::FixedDice.new roll_value.to_i
+  end
+
   step ':player gooit altijd :number met de dobbelsteen' do |player , number|
     @dices = {}
     @dices[player] = Goose::Core::FixedDice.new number.to_i
