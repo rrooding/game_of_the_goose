@@ -5,7 +5,7 @@ module Goose
         @bounce = bounce
       end
 
-      def apply_field_rule(position, _)
+      def apply_field_rule(position, _, _)
         position - @bounce
       end
     end

@@ -5,7 +5,7 @@ module Goose
         @destination = destination
       end
 
-      def apply_field_rule(_, _)
+      def apply_field_rule(_, _, _)
         @destination
       end
     end

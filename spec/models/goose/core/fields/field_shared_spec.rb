@@ -1,12 +1,14 @@
 require 'spec_helper'
 
 RSpec.shared_examples 'a field' do
-  let(:position) { 1 }
   let(:roll) { Goose::Core::Roll.new 5 }
+  let(:next_player) { Goose::Core::Pawn.new :green, 10 }
+  let(:last_player) { Goose::Core::Pawn.new :yellow, 15 }
+  let(:opponents_positions) { [last_player, next_player] }
 
   context 'landing on a field' do
     describe '#next position' do
-      let(:new_position) { subject.apply_field_rule(position, roll) }
+      let(:new_position) { subject.apply_field_rule(position, roll, opponents_positions) }
 
       it 'the new position is the desired destination' do
         expect(new_position).to eql destination

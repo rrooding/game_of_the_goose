@@ -1,7 +1,7 @@
 module Goose
   module Core
     class GooseField < RegularField
-      def apply_field_rule(position, roll)
+      def apply_field_rule(position, roll, _)
         position + roll.total
       end
     end

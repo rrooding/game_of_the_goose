@@ -1,7 +1,7 @@
 module Goose
   module Core
     class RegularField
-      def apply_field_rule(position, _)
+      def apply_field_rule(position, _, _)
         position
       end
 

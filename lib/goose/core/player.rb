@@ -1,5 +1,6 @@
 module Goose
   module Core
+    # TODO: PlayerPawnStat
     class Player
       attr_reader :name, :age, :color
       attr_accessor :position, :skip_turns

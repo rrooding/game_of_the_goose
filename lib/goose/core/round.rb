@@ -18,9 +18,9 @@ module Goose
       end
 
       def select_next_player
-       begin
-         @current_player = next_player
-       end  while player_skips_turn?
+        begin
+          @current_player = next_player
+        end  while player_skips_turn?
 
         update_round_status
       end
@@ -45,6 +45,7 @@ module Goose
         @count += 1 if starting_player == current_player
       end
 
+      # dirty - query and action
       def player_skips_turn?
         if current_player.skip_turn?
           current_player.turn_skipped
@@ -56,5 +57,3 @@ module Goose
     end
   end
 end
-
-

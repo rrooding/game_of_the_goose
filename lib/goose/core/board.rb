@@ -1,6 +1,5 @@
 module Goose
   module Core
-    # responsible for the moves
     class Board
       def initialize(size = 63)
         @fields = Array.new(size, RegularField.new)
