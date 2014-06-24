@@ -1,6 +1,5 @@
 module Goose
   module Core
-    # TODO
     class Pawn
       attr_reader :color
       attr_accessor :position
