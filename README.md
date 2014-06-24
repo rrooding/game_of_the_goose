@@ -20,17 +20,6 @@ The cukes are therefor in Dutch.
 * Run `bundle install`
 
 
-###Web
-
-Start the webserver
-
-```
-$ bundle exec foreman run web
-```
-
-Now go to [http://localhost:8000](http://localhost:8000)
-
-
 ### Testing
 
 Run the features:
