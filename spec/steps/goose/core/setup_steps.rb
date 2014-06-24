@@ -46,13 +46,17 @@ steps_for :core do
   # Field
   FIELD_TYPES = {
     'ganzenvakje' => Goose::Core::GooseField.new,
-    'brug' => Goose::Core::BridgeField.new,
-    'vogelkooi' => Goose::Core::BirdCageField.new,
+    'brug' => Goose::Core::FixedMovementField.new(15),
+    'vogelkooi' => Goose::Core::FixedMovementField.new(9),
     'hotel' => Goose::Core::SkipTurnField.new(1),
     'motel' => Goose::Core::SkipTurnField.new(1),
     'holiday inn' => Goose::Core::SkipTurnField.new(2),
     'bokkesprong' => Goose::Core::GoatField.new,
-    'put' => Goose::Core::WellField.new
+    'put' => Goose::Core::WellField.new,
+    'trap' => Goose::Core::FixedMovementField.new(33),
+    'doolhof' => Goose::Core::FixedMovementField.new(30),
+    'gevangenis' => Goose::Core::SkipTurnField.new(2),
+    'kerkhof' => Goose::Core::FixedMovementField.new(57), # TODO: should be relative
   }
 
   def set_field_type(position, type)
@@ -63,6 +67,12 @@ steps_for :core do
 
   step :set_field_type, 'het :position vakje is een :type'
   step :set_field_type, 'op het :position vakje is een :type'
+
+  step 'de volgende vakjes zijn ganzenvakjes:' do |table|
+    table.hashes.each do |hash|
+      @game.board.field_type_at hash['vakje'].to_i, Goose::Core::GooseField.new
+    end
+  end
 
   step 'op het :position vakje mag je nogmaals dobbelen' do |position|
     @roll_again_field = Goose::Core::RollDiceAgainField.new

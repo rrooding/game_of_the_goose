@@ -35,6 +35,16 @@ steps_for :core do
     @game.roll_dice Goose::Core::FixedDice.new roll_value.to_i
   end
 
+  step 'het hele potje is gespeeld' do
+    while @game.winner.nil? || @game.current_round > 500
+      @game.roll_dice(Goose::Core::SingleDice.new)
+    end
+  end
+
+  step 'is er een winnaar bekend' do
+    expect(@game.winner.nil?).to eql false
+  end
+
   # result
   step 'de beurt van :player_name is geweest' do |player_name|
     assert_current_player(player_name)
@@ -45,6 +55,10 @@ steps_for :core do
     while @game.current_round < 11
       @game.roll_dice(@dices[@game.current_player.name] ||  Goose::Core::FixedDice.new)
     end
+  end
+
+  step 'wint deze een prijs!' do
+   # ?!
   end
 
   step 'heeft :player_name het spel gewonnen' do |player_name|
