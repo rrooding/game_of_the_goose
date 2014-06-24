@@ -1,6 +1,5 @@
 module Goose
   module Core
-    # Todo: Game state
     class Players < Array
       def for_color(color)
         select { |p| p.color == color }.first
