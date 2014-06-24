@@ -9,7 +9,7 @@ module Goose
 
       def run
         start_app
-        execute_user_input(user_input) while finished?
+        execute_user_input(user_input) while !finished?
       end
 
       def execute_user_input(msg)

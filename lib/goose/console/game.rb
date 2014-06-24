@@ -8,7 +8,7 @@ module Goose
         @poins = [:rood, :groen, :geel, :zwart, :green, :wit]
       end
 
-      MSG_WELCOME = 'Welkom bij gansebord.'
+      MSG_WELCOME = 'Welkom bij ganzenbord.'
       def start_app
         print_line(MSG_WELCOME)
         add_players_step(MSG_ADD_PLAYERS)
